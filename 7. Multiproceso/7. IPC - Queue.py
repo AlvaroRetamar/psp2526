@@ -1,31 +1,32 @@
 from multiprocessing import Process, Queue
 import time
 
-def productor(cola):
-    for i in range(3):
+def cocinero(cola):
+    for i in range(15):
         item = f"Dato {i}"
-        print(f"Productor: Enviando {item}...")
+        print(f"Productor: pizza {item}...")
         cola.put(item)
         time.sleep(1)
 
-def consumidor(cola):
+def telepizzero(cola):
     while True:
         item = cola.get() # Se bloquea aquí hasta que haya algo
         if item is None: # Señal para terminar
             break
-        print(f"Consumidor: Recibido {item}")
+        print(f"Consumidor: me voy a enviar la pizza {item}")
+        time.sleep(10)
 
 if __name__ == '__main__':
-    mi_cola = Queue()
+    mostrador = Queue()
 
-    p1 = Process(target=productor, args=(mi_cola,))
-    p2 = Process(target=consumidor, args=(mi_cola,))
+    p1 = Process(target=cocinero, args=(mostrador,))
+    p2 = Process(target=telepizzero, args=(mostrador,))
 
     p1.start()
     p2.start()
 
     p1.join()
-    mi_cola.put(None) # Enviamos la señal de parada al consumidor
+    mostrador.put(None) # Enviamos la señal de parada al consumidor
     p2.join()
 
 # Notas adicionales:
