@@ -1,7 +1,7 @@
 import requests
 
 # 1. El método GET: Consultar información
-url = "https://jsonplaceholder.typicode.com/users/1"
+url = "https://jsonplaceholder.typicode.com/users/2"
 
 try:
     response = requests.get(url)

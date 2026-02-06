@@ -1,5 +1,13 @@
 # usando el modulo requests, sacar lo datos de un pokemon
+import requests
+url_base = "https://pokeapi.co/api/v2/pokemon/"
 
+pokemoncillo = requests.get(url_base+'150').json()
+print(pokemoncillo['name'])
+for i in range(len(pokemoncillo['stats'])):
+    print(f'indice {i} estadistica: {pokemoncillo['stats'][i]['stat']['name']}')
+
+# nombre, ataque, defensa y velocidad
 
 # crear una clase pokemon con los atributos ataque, defensa y velocidad
 
