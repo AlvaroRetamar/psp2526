@@ -1,19 +1,20 @@
 import requests
 
-# URL de una imagen aleatoria (un perrito, por ejemplo)
-image_url = "https://placedog.net/500"
+for i in range(400,501,20):
+    # URL de una imagen aleatoria (un perrito, por ejemplo)
+    image_url = f"https://placedog.net/{i}"
 
-print("Descargando imagen...")
-response = requests.get(image_url)
+    print("Descargando imagen...")
+    response = requests.get(image_url)
 
-if response.status_code == 200:
-    # Abrimos un archivo local en modo 'wb' (write binary)
-    with open("perrito_descargado.jpg", "wb") as f:
-        # Escribimos el contenido de la respuesta en el archivo
-        f.write(response.content)
-    print("Imagen guardada como 'perrito_descargado.jpg'")
-else:
-    print(f"No se pudo descargar la imagen. Código de error: {response.status_code}")
+    if response.status_code == 200:
+        # Abrimos un archivo local en modo 'wb' (write binary)
+        with open(f"perrito_{i}_descargado.jpg", "wb") as f:
+            # Escribimos el contenido de la respuesta en el archivo
+            f.write(response.content)
+        print(f"Imagen guardada como 'perrito_{i}_descargado.jpg'")
+    else:
+        print(f"No se pudo descargar la imagen. Código de error: {response.status_code}")
 
 
 # Ahora lo mismo pero con un archivo muy grande --> usando streaming
